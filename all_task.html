@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style_calendra.css">
 </head>
 
-<body>
+<body onload="toShow()">
 
 
     <div class="navbar" style="text-align: center;text-decoration: none;">
@@ -24,9 +24,7 @@
 
 
     <div class="container">
-
         <table id="tbl">
-
             <thead>
                 <th>S.no</th>
                 <th><a href="#" onclick=sort()>Task</a></th>
@@ -36,15 +34,14 @@
                 <th>Action</th>
             </thead>
             <tbody id="res">
-
             </tbody>
 
         </table>
-        <button onclick="toShow()">ShowTask</button>
+        <!-- <button onclick="toShow()">ShowTask</button> -->
+        <!-- <div id="data" onload="toShow()"></div> -->
     </div>
 
-    <div id="something">
-
+    <div id="dataa">
         <h2 style="text-align: center;"> Update Your Task</h2>
         <div id="input-field" class="view_style">
             <div class="group">

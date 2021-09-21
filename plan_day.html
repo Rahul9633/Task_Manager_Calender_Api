@@ -9,7 +9,7 @@
     <title>Plan Your Day</title>
 </head>
 
-<body>
+<body onload="">
 
 
 
@@ -22,7 +22,6 @@
 
 
     <div class="addTask">
-
         <h2 style="text-align: center;"> Set Your Task</h2>
         <div id="input-field">
             <div class="group">
@@ -56,14 +55,13 @@
                     <button id="save" onclick="saveTaskk()">Save</button>
                 </div>
                 <button id="show" onclick="showDataToday()">Show</button>
+
             </div>
 
         </div>
     </div>
     <div class="container">
-
         <table id="tbl">
-
             <thead>
                 <th>S.no</th>
                 <th><a href="#" onclick=sort()>Task</a></th>
@@ -73,17 +71,10 @@
                 <th>Action</th>
             </thead>
             <tbody id="res">
-
             </tbody>
-
         </table>
     </div>
-
-
-
     <script src="/task.js"></script>
-
-
 </body>
 
 </html>

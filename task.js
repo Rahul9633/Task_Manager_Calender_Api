@@ -1,5 +1,4 @@
-// document.getElementById("something").style.display = "none"
-
+document.getElementById('dataa').style.display = "none"
 function saveTaskk() {
     var total_task = []
     const key = JSON.parse(localStorage.getItem("task"));
@@ -14,14 +13,13 @@ function saveTaskk() {
     const status = document.getElementById("status").value;
     const priority = document.getElementById("priority").value;
     const date = document.getElementById("date").value;
-    var todayTime = new Date(date);
 
-
-    const d = new Date(date);
     // document.write("The current month is " + monthNames[d.getMonth()]);
     // console.log(monthNames[d.getMonth()], "/", month, "/", year)
-    if (task !== "" && status !== " " && priority !== " " && date !== " ") {
+    if (task != "" && status != "" && priority != "" && date != "") {
         total_task.push({ "task": task, "status": status, "priority": priority, "date": date })
+    } else {
+        window.alert("Please Enter Correct Data")
     }
     localStorage.setItem("task", JSON.stringify(total_task))
     clearAll()
@@ -37,6 +35,8 @@ function clearAll() {
 
 
 function toShow() {
+
+
     const arr = []
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -54,19 +54,22 @@ function toShow() {
     })
 
     document.getElementById("res").innerHTML = row
+    // showUpdateTable();
+
+
 
 
 }
 
+// function showUpdateTable() {
+//     document.getElementById("dataa").style.display = "none";
+// }
 
 
-
-
+// document.getElementById("dataa").style.display = "contents";
 var ids;
 function edit(index) {
-
-    // document.getElementById("something").style.display = "contents"
-    // console.log(up)
+    document.getElementById('dataa').style.display = "block"
     ids = index
     const key = JSON.parse(localStorage.getItem("task"))
     // console.log(key[index].task)
@@ -75,11 +78,12 @@ function edit(index) {
     document.getElementById('status').value = key[index].status;
     document.getElementById('priority').value = key[index].priority;
     document.getElementById('date').value = key[index].date;
-    document.getElementById('save').innerHTML = `<button id = "save" onclick = "updateTask()" > update</button> `
+
+    document.getElementById('button').innerHTML = `<button id = "save" onclick = "updateTask()" > Update</button>`;
 
 
 
-    // updateTask(index)
+
 }
 function updateTask() {
     const key = JSON.parse(localStorage.getItem("task"))
@@ -92,6 +96,7 @@ function updateTask() {
 
     localStorage.setItem("task", JSON.stringify(key))
     clearAll()
+    location.reload()
 
 }
 
@@ -104,8 +109,10 @@ function Delete(index) {
     key.splice(index, 1)
 
     localStorage.setItem("task", JSON.stringify(key))
+    location.reload()
 
 }
+
 
 
 function showDataToday() {
@@ -136,7 +143,7 @@ function showDataToday() {
     for (let i = 0; i < key.length; i++) {
         if (key[i].date == today) {
             var index = i;
-            row += `<tr><td>${i + 1}</td><td>${key[i].task}</td><td>${key[i].status}</td><td>${key[i].priority}</td><td>${key[i].date}</td><td><a href="#" onclick="edit(${index})">Edit</a><br><a href="#" onclick="Delete(${index})">Delete</a></td></tr>`
+            row += `<tr><td>${i + 1}</td><td>${key[i].task}</td><td>${key[i].status}</td><td>${key[i].priority}</td><td>${key[i].date}</td><td><a href="#" onclick="edit1(${index})">Edit</a><br><a href="#" onclick="Delete(${index})">Delete</a></td></tr>`
         }
     }
 
@@ -144,79 +151,24 @@ function showDataToday() {
 
 }
 
-let Events = JSON.parse(localStorage.getItem("task"));
-let myEvents = []
+var ids;
+function edit1(index) {
+    // document.getElementById('dataa').style.display = "block"
+    ids = index
+    const key = JSON.parse(localStorage.getItem("task"))
+    // console.log(key[index].task)
 
-myEvents = Events.map((item, index) => {
-    console.log(item)
-    return {
-        id: index,
-        name: item.task,
-        // badge: "08/03 - 08/05",
-        date: item.date,
-        description: item.status,
-        color: changeColor(item),
-        type: "event",
-    }
-})
+    document.getElementById('task').value = key[index].task;
+    document.getElementById('status').value = key[index].status;
+    document.getElementById('priority').value = key[index].priority;
+    document.getElementById('date').value = key[index].date;
 
-function changeColor(item) {
-
-    if (item.status == "start") {
-        return "red"
+    document.getElementById('button').innerHTML = `<button id = "save" onclick = "updateTask()" > Update</button>`;
 
 
-    }
-    else if (item.status == "in-progress") {
-        return "orange"
-    } else {
-        return "green"
-    }
+
 
 }
-
-// Loading all the events in the list to show.
-$('#evoCalendar').evoCalendar({
-
-    calendarEvents: myEvents
-
-});
-
-
-// Custom setting the format of the date
-$('#evoCalendar').evoCalendar({
-    format: 'mm/dd/yyyy',
-    titleFormat: 'MM yyyy',
-    eventHeaderFormat: 'MM d, yyyy'
-});
-
-
-$('#evoCalendar').evoCalendar({
-    sidebarToggler: true,
-    sidebarDisplayDefault: true,
-    eventListToggler: true,
-    eventDisplayDefault: true,
-});
-
-// Highlighting today's date
-
-$('#evoCalendar').evoCalendar({
-    todayHighlight: true
-});
-
-// Determining the event occuring on the given date
-
-
-$('#evoCalendar').evoCalendar({
-
-    onSelectDate: function () {
-
-        console.log('onSelectDate!')
-
-    }
-
-});
-
 
 
 
